@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#F3EEE2">
+<meta name="supported-color-schemes" content="light">
+<title>Idris og Amina — 5 min</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Manrope:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  color-scheme:light;
+  --bg:#F3EEE2;--card:#FBF8F1;--ink:#2A2520;--mute:#8A8171;--mute2:#B5AC9A;--line:#DAD2C0;
+  --a:#3F6B4C;--a-soft:#E1EBDF;--a-tint:#EDF2EA;
+  --b:#A6552B;--b-soft:#F2E2CE;--b-tint:#F7ECDF;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;background:#F3EEE2 !important}
+body{background:#F3EEE2 !important;color:var(--ink);font-family:'Manrope',system-ui,sans-serif;line-height:1.55;overflow-x:hidden;min-height:100vh}
+.wrap{max-width:820px;margin:0 auto;padding:0 clamp(20px,6vw,48px)}
+.wrap-wide{max-width:1000px;margin:0 auto;padding:0 clamp(20px,5vw,52px)}
+::selection{background:var(--b);color:#fff}
+[data-reveal]{opacity:0;transform:translateY(14px);transition:opacity .55s ease,transform .55s ease}
+[data-reveal].in{opacity:1;transform:translateY(0)}
+
+.beta{background:#E7E1D2;border-bottom:1px solid var(--line);padding:10px 0}
+.beta .wrap-wide{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.beta-tag{font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;background:var(--ink);color:var(--bg);padding:3px 9px;border-radius:4px;flex:none}
+.beta p{font-size:12px;color:#5C5548;line-height:1.5}
+
+.hero{padding:clamp(56px,9vw,84px) 0 clamp(30px,5vw,48px)}
+.eyebrow{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--mute);margin-bottom:16px;display:flex;align-items:center;gap:10px}
+.eyebrow::before{content:'';width:20px;height:1px;background:var(--mute2)}
+h1{font-family:'Fraunces',Georgia,serif;font-weight:500;font-size:clamp(28px,5vw,46px);line-height:1.12;letter-spacing:-.01em;color:#1F1B17;margin-bottom:14px}
+.lede{font-size:clamp(14.5px,1.8vw,17px);color:#5C5548;max-width:52ch}
+
+.panel{padding:clamp(36px,5.5vw,56px) 0}
+.panel.a{background:var(--a-tint)}
+.panel.b{background:var(--b-tint)}
+.panel-eyebrow{font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:.1em;padding:4px 11px;border-radius:999px;display:inline-block;margin-bottom:14px;font-weight:600}
+.panel.a .panel-eyebrow{color:var(--a);background:var(--a-soft)}
+.panel.b .panel-eyebrow{color:var(--b);background:var(--b-soft)}
+.panel h2{font-family:'Fraunces',serif;font-weight:500;font-size:clamp(21px,3vw,28px);letter-spacing:-.01em;margin-bottom:clamp(18px,3vw,26px);color:#1F1B17}
+
+.scenes{display:flex;flex-direction:column}
+.scene{padding:clamp(16px,2.4vw,22px) 0;border-top:1px solid rgba(42,37,32,.08);display:flex;gap:16px;align-items:flex-start}
+.scene:first-child{border-top:none;padding-top:0}
+.scene-icon{width:38px;height:38px;border-radius:50%;flex:none;display:flex;align-items:center;justify-content:center}
+.panel.a .scene-icon{background:var(--a-soft);border:1.5px solid var(--a);color:var(--a)}
+.panel.b .scene-icon{background:var(--b-soft);border:1.5px solid var(--b);color:var(--b)}
+.scene-icon svg{width:17px;height:17px}
+.scene p{font-family:'Fraunces',serif;font-style:italic;font-size:clamp(16px,2.1vw,19px);line-height:1.45;color:#332C24;max-width:46ch}
+.scene b{font-style:normal;font-weight:600;color:var(--ink)}
+
+.between{padding:clamp(30px,4.5vw,44px) 0;text-align:center}
+.between .wrap{text-align:center}
+.timeline{display:flex;align-items:center;justify-content:center;gap:12px;margin-bottom:18px}
+.tl-dot{width:10px;height:10px;border-radius:50%;background:var(--a)}
+.tl-dot.b{background:var(--b)}
+.tl-line{width:clamp(60px,15vw,140px);height:2px;background:repeating-linear-gradient(90deg,var(--mute2) 0 6px,transparent 6px 12px)}
+.tl-year{font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--mute)}
+.between p{font-size:clamp(14px,1.7vw,16px);color:#5C5548;max-width:56ch;margin:0 auto;font-style:italic}
+.between p b{color:var(--ink);font-style:normal}
+.stat{font-family:'IBM Plex Mono',monospace;font-size:12.5px;color:var(--b);background:var(--b-soft);padding:2px 8px;border-radius:5px;font-weight:600;font-style:normal}
+
+.odds{margin-top:22px;text-align:center}
+.odds-grid{display:grid;grid-template-columns:repeat(23,1fr);gap:3px;margin:0 auto 10px;max-width:400px}
+@media(max-width:600px){.odds-grid{grid-template-columns:repeat(15,1fr)}}
+.odot{aspect-ratio:1;border-radius:50%;background:var(--line);opacity:0;transform:scale(.4);transition:opacity .3s ease,transform .3s ease}
+.odot.hit{background:var(--b)}
+.odot.in{opacity:1;transform:scale(1)}
+.odds-caption{font-size:12px;color:var(--mute);max-width:44ch;line-height:1.5;margin:0 auto}
+
+.pivot{padding:clamp(40px,6vw,64px) 0;background:var(--card);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.pivot h2{font-family:'Fraunces',serif;font-weight:500;font-style:italic;font-size:clamp(24px,3.6vw,34px);color:#1F1B17;margin-bottom:16px;max-width:20ch}
+.pivot .sub{font-size:14.5px;color:#5C5548;max-width:60ch;margin-bottom:clamp(24px,3.5vw,32px)}
+
+.rights-table{width:100%;border-collapse:collapse;margin-bottom:clamp(22px,3.5vw,30px);font-size:13.5px}
+.rights-table th{text-align:left;font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--mute);padding:0 10px 10px 0;font-weight:500}
+.rights-table td{padding:11px 10px 11px 0;border-top:1px solid var(--line);vertical-align:middle}
+.rights-table td:first-child{font-weight:600;color:#1F1B17}
+.pill{font-family:'IBM Plex Mono',monospace;font-size:11.5px;font-weight:600;padding:3px 10px;border-radius:999px;display:inline-block}
+.pill.yes{background:var(--a-soft);color:var(--a)}
+.pill.no{background:var(--b-soft);color:var(--b)}
+.rights-table tr.hl td:first-child{position:relative}
+.rights-table tr.hl td:first-child::after{content:'← Amina';margin-left:8px;font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--b);font-weight:600}
+
+.pivot-note{font-size:13px;color:var(--mute);max-width:64ch;line-height:1.6}
+.pivot-note b{color:#4A4033}
+.src{font-size:11px;color:var(--mute2);margin-top:6px;display:block}
+
+.cases{padding:clamp(32px,5vw,48px) 0}
+.cases h3{font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute);margin-bottom:16px}
+.case-row{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+@media(max-width:760px){.case-row{grid-template-columns:1fr}}
+.case-box{background:#EDEAE2;border:1px solid #C9C2B3;border-left:3px solid #8A8171;border-radius:2px 10px 10px 2px;padding:16px 18px}
+.case-tag{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:#6B6250;margin-bottom:8px;display:block}
+.case-box p{font-family:'Manrope',sans-serif;font-size:13px;color:#4A463D;line-height:1.55}
+
+.numbers{padding:clamp(36px,5.5vw,56px) 0}
+.num-row{display:flex;gap:clamp(32px,6vw,64px);flex-wrap:wrap;align-items:flex-end}
+.big{font-family:'Fraunces',serif;font-weight:500;font-size:clamp(36px,5.6vw,52px);color:#1F1B17;letter-spacing:-.02em}
+.big em{color:var(--b);font-style:normal}
+.big-sm{font-family:'Fraunces',serif;font-weight:500;font-size:clamp(24px,3.6vw,32px);color:#1F1B17;letter-spacing:-.02em}
+.big-sm em{color:var(--b);font-style:normal}
+.num-cap{font-size:12.5px;color:var(--mute);margin-top:4px}
+.fam-grid{display:grid;grid-template-columns:repeat(14,1fr);gap:6px;margin-top:22px;max-width:620px}
+@media(max-width:640px){.fam-grid{grid-template-columns:repeat(10,1fr)}}
+.fam{aspect-ratio:1;display:flex;align-items:center;justify-content:center;background:var(--card);border:1px solid var(--line);border-radius:6px;color:var(--b);opacity:0;transform:scale(.6);transition:opacity .35s ease,transform .35s ease}
+.fam.in{opacity:1;transform:scale(1)}
+.fam svg{width:55%;height:55%}
+.fam-cap{font-size:11.5px;color:var(--mute);font-family:'IBM Plex Mono',monospace;margin-top:10px}
+
+.close{padding:clamp(44px,7vw,72px) 0 clamp(56px,8vw,84px);text-align:center;border-top:1px solid var(--line)}
+.close blockquote{font-family:'Fraunces',serif;font-weight:500;font-style:italic;font-size:clamp(20px,3.2vw,30px);line-height:1.3;color:#1F1B17;max-width:20ch;margin:0 auto 20px}
+.close .bridge{font-size:15px;color:#5C5548;max-width:44ch;margin:0 auto}
+.close .bridge b{color:var(--ink)}
+
+/* ---- ask / measure level ---- */
+.ask{padding:clamp(40px,6vw,64px) 0;background:var(--card);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.ask-eyebrow{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute);margin-bottom:8px}
+.ask h2{font-family:'Fraunces',serif;font-weight:500;font-size:clamp(22px,3.2vw,30px);color:#1F1B17;margin-bottom:12px;max-width:20ch}
+.ask-sub{font-size:14.5px;color:#5C5548;max-width:62ch;margin-bottom:16px}
+.ask-thesis{
+  font-family:'Fraunces',serif;font-weight:500;font-style:italic;
+  font-size:clamp(19px,2.8vw,25px);color:#1F1B17;max-width:22ch;
+  margin-bottom:clamp(18px,2.8vw,24px);line-height:1.35;
+}
+.ask-sub:last-of-type{margin-bottom:clamp(24px,3.5vw,34px)}
+.ask-sub b{color:#1F1B17}
+.ask-grid{display:grid;grid-template-columns:1.3fr 1fr;gap:16px}
+@media(max-width:720px){.ask-grid{grid-template-columns:1fr}}
+.ask-card{background:var(--bg);border:1px solid var(--line);border-radius:14px;padding:clamp(18px,3vw,26px)}
+.ask-card.featured{border-color:var(--a);background:var(--a-soft)}
+.ask-tag{font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;padding:3px 10px;border-radius:999px;display:inline-block;margin-bottom:12px;font-weight:600}
+.ask-card.featured .ask-tag{background:var(--a);color:#fff}
+.ask-card:not(.featured) .ask-tag{background:var(--line);color:#5C5548}
+.ask-card h3{font-family:'Fraunces',serif;font-weight:500;font-size:17px;color:#1F1B17;margin-bottom:8px}
+.ask-card p{font-size:13.5px;color:#4A4033;line-height:1.6}
+.ask-card p b{color:#1F1B17}
+.ask-scope{font-size:12.5px;color:var(--mute);margin-top:18px;max-width:64ch}
+</style>
+</head>
+<body>
+<div style="background:#F3EEE2;min-height:100vh;">
+
+  <div class="beta">
+    <div class="wrap-wide">
+      <span class="beta-tag">Under arbeid · Beta</span>
+      <p>Tallene er avledet fra nasjonale rater og lokale antagelser, ikke offisiell kommunestatistikk. Sakseksemplene er avdekket via migrasjonskoordinator-rollen — en del av dette prosjektet.</p>
+    </div>
+  </div>
+
+  <section class="hero">
+    <div class="wrap">
+      <p class="eyebrow" data-reveal>Tønsberg kommune</p>
+      <h1 data-reveal>Idris kom i 2023. Amina i 2025. Samme by.</h1>
+      <p class="lede" data-reveal>To reiser inn i samme kommune — og hva som skiller dem.</p>
+    </div>
+  </section>
+
+  <section class="panel a">
+    <div class="wrap">
+      <span class="panel-eyebrow" data-reveal>2023</span>
+      <h2 data-reveal>Idris blir bosatt</h2>
+      <div class="scenes">
+        <div class="scene" data-reveal>
+          <div class="scene-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 21s7-6.2 7-11.5A7 7 0 1 0 5 9.5C5 14.8 12 21 12 21Z"/><circle cx="12" cy="9.3" r="2.4"/></svg></div>
+          <p>En veileder venter på flyplassen med navnet hans på et ark. <b>Alt er avtalt</b> før han lander.</p>
+        </div>
+        <div class="scene" data-reveal>
+          <div class="scene-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 11.5 12 4l8 7.5"/><path d="M6 10v9h12v-9"/></svg></div>
+          <p>Møblert leilighet, legetime, kartleggingssamtale — <b>klargjort i bakgrunnen</b>, uten at han må be om noe.</p>
+        </div>
+        <div class="scene" data-reveal>
+          <div class="scene-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 5.5S6 4 9 4s5 1.5 5 1.5v14S12 18 9 18s-5 1.5-5 1.5v-14Z"/><path d="M14 5.5S16 4 19 4s1 1.5 1 1.5v14s-1-1.5-4-1.5-2 1.5-2 1.5v-14Z"/></svg></div>
+          <p>Introduksjonsprogrammet starter med <b>en plan bygget rundt akkurat ham</b>.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="between">
+    <div class="wrap">
+      <div class="timeline" data-reveal>
+        <span class="tl-year">2023</span><span class="tl-dot a"></span><span class="tl-line"></span><span class="tl-dot b"></span><span class="tl-year">2025</span>
+      </div>
+      <p data-reveal>Idris søker familiegjenforening så snart han kan: dokumentasjon, et gebyr på 7 800 kr,
+      en reise til utenriksstasjon i naboland. <span class="stat">17 av 100</span> lykkes til slutt — Idris blir en av dem.</p>
+      <div class="odds" data-reveal>
+        <div class="odds-grid" id="oddsgrid"></div>
+        <p class="odds-caption">~230 bosettes i Tønsberg årlig · ~39 blir senere referanseperson for en vellykket gjenforening</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="panel b">
+    <div class="wrap">
+      <span class="panel-eyebrow" data-reveal>2025</span>
+      <h2 data-reveal>Amina og barna kommer</h2>
+      <div class="scenes">
+        <div class="scene" data-reveal>
+          <div class="scene-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 11.5 12 4l8 7.5"/><path d="M6 10v9h12v-9"/></svg></div>
+          <p>Denne gangen er det <b>Idris som venter</b> — ikke en veileder. Fire personer i hans ettromsleilighet, for ingen har vurdert om den er stor nok til fem.</p>
+        </div>
+        <div class="scene" data-reveal>
+          <div class="scene-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M12 8v8M8 12h8"/></svg></div>
+          <p>Ingen innkalling til tuberkulosekontroll kommer <b>noensinne av seg selv</b>. Ingen har heller fulgt opp hvordan de har det etter alt de har vært gjennom.</p>
+        </div>
+        <div class="scene" data-reveal>
+          <div class="scene-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 5.5S6 4 9 4s5 1.5 5 1.5v14S12 18 9 18s-5 1.5-5 1.5v-14Z"/><path d="M14 5.5S16 4 19 4s1 1.5 1 1.5v14s-1-1.5-4-1.5-2 1.5-2 1.5v-14Z"/></svg></div>
+          <p>Det ene som skjer automatisk: Amina kalles inn til introduksjonsprogrammet. <b>Det eneste steget noen faktisk har ansvar for.</b></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="pivot">
+    <div class="wrap-wide">
+      <h2 data-reveal>Og hun er den heldige.</h2>
+      <p class="sub" data-reveal>Amina er gjenforent med en flyktning under fem års botid — den <b>eneste</b> kombinasjonen med rett til introprogram. De fleste familieinnvandrere har ikke det.</p>
+
+      <table class="rights-table" data-reveal>
+        <thead><tr><th>Referanseperson</th><th>Introprogram</th><th>Norskopplæring</th></tr></thead>
+        <tbody>
+          <tr class="hl"><td>Flyktning, &lt; 5 års botid</td><td><span class="pill yes">Ja</span></td><td><span class="pill yes">Ja</span></td></tr>
+          <tr><td>Norsk / nordisk borger</td><td><span class="pill no">Nei</span></td><td><span class="pill yes">Ja</span></td></tr>
+          <tr><td>Arbeidsinnvandrer, ikke-EØS</td><td><span class="pill no">Nei</span></td><td><span class="pill no">Betaler selv</span></td></tr>
+          <tr><td>Arbeidsinnvandrer, EØS/EFTA</td><td><span class="pill no">Nei</span></td><td><span class="pill no">Nei</span></td></tr>
+        </tbody>
+      </table>
+
+      <p class="pivot-note" data-reveal>Familieinnvandring har vært <b>Norges største innvandringsgruppe i flere tiår</b> — men flertallet har historisk stått uten rett til kvalifisering. Fra 2026 kommer en <b>forsøksordning</b> som erkjenner nettopp dette gapet.
+      <span class="src">Kilde: Proba samfunnsanalyse (2012) for IMDi · Meld. St. 17 (2023–2024)</span></p>
+    </div>
+  </section>
+
+  <section class="cases">
+    <div class="wrap-wide">
+      <h3 data-reveal>Sett i Tønsberg</h3>
+      <div class="case-row" data-reveal>
+        <div class="case-box">
+          <span class="case-tag">Sak · Tønsberg kommune</span>
+          <p>Tuberkulosekontrollen ble aldri bestilt. En familie ble ikke fanget opp før noen tilfeldigvis oppdaget det — <b>etter et halvt år</b>.</p>
+        </div>
+        <div class="case-box">
+          <span class="case-tag">Sak · Tønsberg kommune</span>
+          <p>Den herboende sa opp egen leilighet på løst råd om kommunal hjelp. Familien havnet bak <b>60 andre i boligkøen</b> — kommunen hadde da null ledige boliger.</p>
+        </div>
+        <div class="case-box">
+          <span class="case-tag">Sak · Tønsberg kommune</span>
+          <p>Familien fikk brev om retten til norskopplæring, men forsto ikke hva det innebar. <b>Ingen fulgte opp</b>, og retten gikk ubrukt.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="numbers">
+    <div class="wrap-wide">
+      <div class="num-row" data-reveal>
+        <div><p class="big">~42 <em>familier</em></p><p class="num-cap">anslått familiegjenforent til Tønsberg per år</p></div>
+        <div><p class="big-sm">~80 <em>personer</em></p><p class="num-cap">til sammen — voksne og barn</p></div>
+      </div>
+      <div class="fam-grid" id="famgrid"></div>
+      <p class="fam-cap" data-reveal>hver figur ≈ én familie · omtrent én ny Amina annenhver uke, hele året</p>
+    </div>
+  </section>
+
+  <section class="ask">
+    <div class="wrap-wide">
+      <p class="ask-eyebrow" data-reveal>Vårt ståsted</p>
+      <h2 data-reveal>Vi ser det fra oppvekst og læring</h2>
+      <p class="ask-thesis" data-reveal>For å hjelpe barna, må vi hjelpe familien rundt dem.</p>
+      <p class="ask-sub" data-reveal>Vi skal ikke ta ansvar for selve familiegjenforeningsprosessen — det er ikke vårt mandat. Men barnets beste avhenger av at familien fungerer, og det gjør den ikke i disse sakene.</p>
+      <p class="ask-sub" data-reveal>Helsesykepleiere, barnehageansatte og lærere møter dette først. Vi har i dag ikke formelt samarbeid med Læringssenteret om det som skjer videre — og ingen har mandat til å se mønsteret på tvers. Vi ber om <b>seks måneder</b> til å undersøke det fra vårt eget ståsted.</p>
+
+      <div class="ask-grid" data-reveal>
+        <div class="ask-card featured">
+          <span class="ask-tag">Allerede i gang</span>
+          <h3>Sjekklisten</h3>
+          <p>En interaktiv sjekkliste for familiegjenforente og deres nærmeste — <b>«dette er stegene du må ta, og når.»</b> Kan vi dekke noe av gapet bare ved å gjøre stegene synlige?</p>
+        </div>
+        <div class="ask-card">
+          <span class="ask-tag">Læringsspor</span>
+          <h3>Intervjuer og research</h3>
+          <p>Snakke med barnehageansatte og helsesykepleiere som møter dette først. Kartlegge flere saker.</p>
+        </div>
+      </div>
+
+      <p class="ask-scope" data-reveal>Ett av flere mulige tiltak. Vi ber om mandat til å teste — ikke til å eie hele løsningen.</p>
+    </div>
+  </section>
+
+  <section class="close">
+    <div class="wrap" data-reveal>
+      <blockquote>I dag er familien selv den eneste som ser hele bildet.</blockquote>
+      <p class="bridge">Vi ber om mandat til å endre det — for barnas skyld, fra vårt eget ståsted i oppvekst og læring.</p>
+    </div>
+  </section>
+
+</div>
+
+<script>
+const familyIcon = '<svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><circle cx="8.6" cy="7.1" r="2.7"/><path d="M8.6 11.1c-3 0-5.4 2.3-5.4 5.6V19h10.8v-2.3c0-3.3-2.4-5.6-5.4-5.6Z"/><circle cx="16.6" cy="9.4" r="2.15"/><path d="M16.6 12.6c-2.3 0-4.15 1.8-4.15 4.4V19h8.3v-2c0-2.6-1.85-4.4-4.15-4.4Z" opacity=".82"/></svg>';
+const famGrid = document.getElementById('famgrid');
+for(let i=0;i<42;i++){
+  const d = document.createElement('div');
+  d.className='fam';
+  d.innerHTML = familyIcon;
+  famGrid.appendChild(d);
+}
+const famIo = new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      Array.from(famGrid.children).forEach((el,idx)=>{
+        el.style.transitionDelay=(idx*14)+'ms';
+        el.classList.add('in');
+      });
+      famIo.unobserve(e.target);
+    }
+  });
+},{threshold:.15});
+famIo.observe(famGrid);
+
+const oddsGrid = document.getElementById('oddsgrid');
+const totalDots = 230, hitDots = 39;
+const step = totalDots / hitDots;
+const hitSet = new Set();
+for(let k=0;k<hitDots;k++) hitSet.add(Math.round(k*step) % totalDots);
+for(let i=0;i<totalDots;i++){
+  const d = document.createElement('div');
+  d.className = 'odot' + (hitSet.has(i) ? ' hit' : '');
+  oddsGrid.appendChild(d);
+}
+const oddsIo = new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      Array.from(oddsGrid.children).forEach((el,idx)=>{
+        el.style.transitionDelay = (idx*3)+'ms';
+        el.classList.add('in');
+      });
+      oddsIo.unobserve(e.target);
+    }
+  });
+},{threshold:.2});
+oddsIo.observe(oddsGrid);
+
+const io = new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+  });
+},{threshold:.15});
+document.querySelectorAll('[data-reveal]').forEach((el,i)=>{
+  el.style.transitionDelay=(i%5*50)+'ms';
+  io.observe(el);
+});
+</script>
+</body>
+</html>
