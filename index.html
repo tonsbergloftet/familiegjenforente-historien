@@ -88,6 +88,15 @@ h1{font-family:'Fraunces',Georgia,serif;font-weight:500;font-size:clamp(28px,5vw
 
 .pivot-note{font-size:13px;color:var(--mute);max-width:64ch;line-height:1.6}
 .pivot-note b{color:#4A4033}
+.cat-cloud{display:flex;flex-wrap:wrap;gap:11px 13px;margin-bottom:clamp(20px,3vw,28px)}
+.cat-chip{
+  font-family:'IBM Plex Mono',monospace;font-size:12.5px;color:#4A4033;
+  background:var(--bg);border:1px solid var(--line);border-radius:8px;
+  padding:7px 14px;
+}
+.cat-chip.hl{border-color:var(--b);color:var(--b);font-weight:600;background:var(--b-soft)}
+.cat-note{font-size:13.5px;color:#5C5548;max-width:60ch;margin-bottom:clamp(20px,3vw,28px);line-height:1.6}
+.cat-note b{color:#1F1B17}
 .src{font-size:11px;color:var(--mute2);margin-top:6px;display:block}
 
 .cases{padding:clamp(32px,5vw,48px) 0}
@@ -148,7 +157,7 @@ h1{font-family:'Fraunces',Georgia,serif;font-weight:500;font-size:clamp(28px,5vw
   <div class="beta">
     <div class="wrap-wide">
       <span class="beta-tag">Under arbeid · Beta</span>
-      <p>Tallene er avledet fra nasjonale rater og lokale antagelser, ikke offisiell kommunestatistikk. Sakseksemplene er avdekket via migrasjonskoordinator-rollen — en del av dette prosjektet.</p>
+      <p>Tallene er avledet fra nasjonal statistikk og lokale antagelser, ikke offisielle tall fra Tønsberg. Sakseksemplene er avdekket via migrasjonskoordinator-rollen — en del av dette prosjektet.</p>
     </div>
   </div>
 
@@ -206,11 +215,11 @@ h1{font-family:'Fraunces',Georgia,serif;font-weight:500;font-size:clamp(28px,5vw
         </div>
         <div class="scene" data-reveal>
           <div class="scene-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M12 8v8M8 12h8"/></svg></div>
-          <p>Ingen innkalling til tuberkulosekontroll kommer <b>noensinne av seg selv</b>. Ingen har heller fulgt opp hvordan de har det etter alt de har vært gjennom.</p>
+          <p>Ingen automatisk kontakt med helse = ingen eller for sen tuberkolosesjekk. Ingen har heller fulgt opp hvordan de har det etter alt de har vært gjennom.</p>
         </div>
         <div class="scene" data-reveal>
           <div class="scene-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 5.5S6 4 9 4s5 1.5 5 1.5v14S12 18 9 18s-5 1.5-5 1.5v-14Z"/><path d="M14 5.5S16 4 19 4s1 1.5 1 1.5v14s-1-1.5-4-1.5-2 1.5-2 1.5v-14Z"/></svg></div>
-          <p>Det ene som skjer automatisk: Amina kalles inn til introduksjonsprogrammet. <b>Det eneste steget noen faktisk har ansvar for.</b></p>
+          <p>Det ene som skjer automatisk: Amina kalles inn til samtale med læringssenteret og blir loset inn i introprogrammet. <b>Fordi hun har rett og plikt til introprogrammet.</b></p>
         </div>
       </div>
     </div>
@@ -219,17 +228,19 @@ h1{font-family:'Fraunces',Georgia,serif;font-weight:500;font-size:clamp(28px,5vw
   <section class="pivot">
     <div class="wrap-wide">
       <h2 data-reveal>Og hun er den heldige.</h2>
-      <p class="sub" data-reveal>Amina er gjenforent med en flyktning under fem års botid — den <b>eneste</b> kombinasjonen med rett til introprogram. De fleste familieinnvandrere har ikke det.</p>
+      <p class="sub" data-reveal>Amina er gjenforent med en flyktning under fem års botid — det gir henne rett til introprogram. Ikke alle familieinnvandrere har det.</p>
 
-      <table class="rights-table" data-reveal>
-        <thead><tr><th>Referanseperson</th><th>Introprogram</th><th>Norskopplæring</th></tr></thead>
-        <tbody>
-          <tr class="hl"><td>Flyktning, &lt; 5 års botid</td><td><span class="pill yes">Ja</span></td><td><span class="pill yes">Ja</span></td></tr>
-          <tr><td>Norsk / nordisk borger</td><td><span class="pill no">Nei</span></td><td><span class="pill yes">Ja</span></td></tr>
-          <tr><td>Arbeidsinnvandrer, ikke-EØS</td><td><span class="pill no">Nei</span></td><td><span class="pill no">Betaler selv</span></td></tr>
-          <tr><td>Arbeidsinnvandrer, EØS/EFTA</td><td><span class="pill no">Nei</span></td><td><span class="pill no">Nei</span></td></tr>
-        </tbody>
-      </table>
+      <div class="cat-cloud" data-reveal>
+        <span class="cat-chip hl">Flyktning, nylig bosatt ← Amina</span>
+        <span class="cat-chip">Flyktning, bosatt lenge</span>
+        <span class="cat-chip">Arbeidsinnvandrer, EØS</span>
+        <span class="cat-chip">Arbeidsinnvandrer, utenfor EØS</span>
+        <span class="cat-chip">Norsk / nordisk borger</span>
+        <span class="cat-chip">Permanent opphold</span>
+        <span class="cat-chip">Andregenerasjon, samme landbakgrunn</span>
+      </div>
+
+      <p class="cat-note" data-reveal>Hver av disse kombinasjonene — kombinert med <b>hvor lenge referansepersonen har bodd i Norge</b> — gir ulike rettigheter og plikter. Det finnes <b>ingen samlet oversikt</b> familien selv kan slå opp; det krever kjennskap til regelverket, sak for sak.</p>
 
       <p class="pivot-note" data-reveal>Familieinnvandring har vært <b>Norges største innvandringsgruppe i flere tiår</b> — men flertallet har historisk stått uten rett til kvalifisering. Fra 2026 kommer en <b>forsøksordning</b> som erkjenner nettopp dette gapet.
       <span class="src">Kilde: Proba samfunnsanalyse (2012) for IMDi · Meld. St. 17 (2023–2024)</span></p>
@@ -238,7 +249,7 @@ h1{font-family:'Fraunces',Georgia,serif;font-weight:500;font-size:clamp(28px,5vw
 
   <section class="cases">
     <div class="wrap-wide">
-      <h3 data-reveal>Sett i Tønsberg</h3>
+      <h3 data-reveal>Konkrete caser i Tønsberg</h3>
       <div class="case-row" data-reveal>
         <div class="case-box">
           <span class="case-tag">Sak · Tønsberg kommune</span>
@@ -272,8 +283,8 @@ h1{font-family:'Fraunces',Georgia,serif;font-weight:500;font-size:clamp(28px,5vw
       <p class="ask-eyebrow" data-reveal>Vårt ståsted</p>
       <h2 data-reveal>Vi ser det fra oppvekst og læring</h2>
       <p class="ask-thesis" data-reveal>For å hjelpe barna, må vi hjelpe familien rundt dem.</p>
-      <p class="ask-sub" data-reveal>Vi skal ikke ta ansvar for selve familiegjenforeningsprosessen — det er ikke vårt mandat. Men barnets beste avhenger av at familien fungerer, og det gjør den ikke i disse sakene.</p>
-      <p class="ask-sub" data-reveal>Helsesykepleiere, barnehageansatte og lærere møter dette først. Vi har i dag ikke formelt samarbeid med Læringssenteret om det som skjer videre — og ingen har mandat til å se mønsteret på tvers. Vi ber om <b>seks måneder</b> til å undersøke det fra vårt eget ståsted.</p>
+      <p class="ask-sub" data-reveal>Vi skal ikke ta ansvar for selve familiegjenforeningsprosessen. Men barnets beste avhenger av at familien fungerer, og det gjør den ikke i disse sakene.</p>
+      <p class="ask-sub" data-reveal>Ressurs migrasjon vil gi riktig informasjon til fagpersonene eller hjelperne de møter, men ikke direkte til personene det gjelder eller deres «uformelle» rådgivere. Hvordan kan vi <b>hjelpe disse familiene uten å bruke store ressurser?</b> </p>
 
       <div class="ask-grid" data-reveal>
         <div class="ask-card featured">
@@ -288,14 +299,14 @@ h1{font-family:'Fraunces',Georgia,serif;font-weight:500;font-size:clamp(28px,5vw
         </div>
       </div>
 
-      <p class="ask-scope" data-reveal>Ett av flere mulige tiltak. Vi ber om mandat til å teste — ikke til å eie hele løsningen.</p>
+      <p class="ask-scope" data-reveal>Ett av flere mulige tiltak.</p>
     </div>
   </section>
 
   <section class="close">
     <div class="wrap" data-reveal>
-      <blockquote>I dag er familien selv den eneste som ser hele bildet.</blockquote>
-      <p class="bridge">Vi ber om mandat til å endre det — for barnas skyld, fra vårt eget ståsted i oppvekst og læring.</p>
+      <blockquote>I dag er det ingen som ser hele bildet. I hvertfall ikke familiene.</blockquote>
+      <p class="bridge">Vi ser et behov for å gjøre det lettere å navigere i plikter, rettigheter og muligheter for disse familiene. For barnas skyld.</p>
     </div>
   </section>
 
