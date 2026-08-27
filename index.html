@@ -178,6 +178,7 @@ textarea#pasteArea::placeholder { color: var(--ink-dim); }
 .panels {
   display: flex;
   flex: 1;
+  min-height: 0;
   overflow: hidden;
 }
 
@@ -366,6 +367,18 @@ textarea#pasteArea::placeholder { color: var(--ink-dim); }
   overflow: hidden;
   background: #e8edf0;
   flex: 1;
+  min-height: 0;
+}
+
+#preview {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
+  background: white;
 }
 
 .preview-label {
@@ -381,17 +394,6 @@ textarea#pasteArea::placeholder { color: var(--ink-dim); }
   z-index: 10;
   pointer-events: none;
   white-space: nowrap;
-}
-
-#preview {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  border: none;
-  display: block;
-  background: white;
 }
 
 /* Modal */
@@ -999,27 +1001,12 @@ function debugPreview() {
   alert(JSON.stringify(info, null, 2));
 }
 
-let previewReady = false;
-
 function updatePreview() {
   if (!domDoc) return;
   const serialized = '<!DOCTYPE html>\n' + domDoc.documentElement.outerHTML;
   currentHtml = serialized;
   const iframe = document.getElementById('preview');
-
-  if (!previewReady) {
-    // Første gang: reset til about:blank og skriv etter load
-    iframe.onload = null;
-    iframe.src = 'about:blank';
-    iframe.onload = function() {
-      iframe.onload = null;
-      previewReady = true;
-      writeToIframe(iframe, serialized);
-    };
-  } else {
-    // Deretter: skriv direkte
-    writeToIframe(iframe, serialized);
-  }
+  writeToIframe(iframe, serialized);
 }
 
 function writeToIframe(iframe, html) {
