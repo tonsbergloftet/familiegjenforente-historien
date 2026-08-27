@@ -593,6 +593,8 @@ textarea#pasteArea::placeholder { color: var(--ink-dim); }
 }
 .cf-submit:hover { opacity: 0.85; }
 .cf-submit:disabled { opacity: 0.3; cursor: default; }
+
+@media (max-width: 680px) {
   .panel-right { display: none; }
   .topbar-title { display: none; }
 }
@@ -629,7 +631,6 @@ textarea#pasteArea::placeholder { color: var(--ink-dim); }
     </div>
     <div class="topbar-right">
       <button class="topbar-btn" id="previewToggleBtn" onclick="togglePreview()">⛶ Forhåndsvisning</button>
-      <button class="topbar-btn" onclick="debugPreview()" style="opacity:0.5;font-size:10px">debug</button>
       <button class="topbar-btn" onclick="downloadHtml()">↓ Last ned</button>
     </div>
   </div>
@@ -985,20 +986,6 @@ let previewTimer = null;
 function schedulePreview() {
   clearTimeout(previewTimer);
   previewTimer = setTimeout(updatePreview, 300);
-}
-
-function debugPreview() {
-  const iframe = document.getElementById('preview');
-  const info = {
-    src: iframe.src,
-    srcdoc: iframe.srcdoc?.slice(0,50),
-    contentDocReady: !!iframe.contentDocument,
-    bodyContent: iframe.contentDocument?.body?.innerHTML?.slice(0,100) || 'ingen tilgang',
-    currentHtmlLength: currentHtml?.length,
-    domDocReady: !!domDoc,
-  };
-  console.log('Preview debug:', info);
-  alert(JSON.stringify(info, null, 2));
 }
 
 function updatePreview() {
